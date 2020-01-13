@@ -20,7 +20,7 @@ public class Consumer {
     public static void main(String[] args) throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("test_quick_consumer_name");
 
-        consumer.setNamesrvAddr(Const.NAMESRV_ADDR);
+        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
@@ -38,24 +38,24 @@ public class Consumer {
 
                     String keys = messageExt.getKeys();
 
-                    if("key1".equals(keys)){
-                        System.err.println("消息消费失败。。");
-                        int a = 1/0;
-                    }
+//                    if("key1".equals(keys)){
+//                        System.err.println("消息消费失败。。");
+//                        int a = 1/0;
+//                    }
 
                     String mshBody = new String(messageExt.getBody(), RemotingHelper.DEFAULT_CHARSET);
 
                     System.out.println("topic : " + topic + ", tags : " + tags + ", keys : " + keys + ", msgBody : " + mshBody);
                 }catch (Exception e){
                     e.printStackTrace();
-                    int reconsumeTimes = messageExt.getReconsumeTimes();
-                    System.out.println("reconsumeTimes : " + reconsumeTimes);
-
-                    if(reconsumeTimes == 3){
-                        // 记录日志
-                        // 做补偿机制
-                        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-                    }
+//                    int reconsumeTimes = messageExt.getReconsumeTimes();
+//                    System.out.println("reconsumeTimes : " + reconsumeTimes);
+//
+//                    if(reconsumeTimes == 3){
+//                        // 记录日志
+//                        // 做补偿机制
+//                        return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+//                    }
                     return  ConsumeConcurrentlyStatus.RECONSUME_LATER;
                 }
 
