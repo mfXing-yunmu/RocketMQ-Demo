@@ -20,7 +20,7 @@ public class Consumer {
     public static void main(String[] args) throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("test_quick_consumer_name");
 
-        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_MASTER_SLAVE);
+        consumer.setNamesrvAddr(Const.NAMESRV_ADDR_SINGLE);
 
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET);
 
